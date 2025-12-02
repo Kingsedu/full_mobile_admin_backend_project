@@ -7,9 +7,12 @@ const express_1 = __importDefault(require("express"));
 const node_path_1 = __importDefault(require("node:path"));
 const cors_1 = __importDefault(require("cors"));
 const env_1 = require("./config/env");
+const db_mongoose_1 = require("./db/db.mongoose");
+const express_2 = require("@clerk/express");
 // import { fileURLToPath } from 'url';
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
+app.use((0, express_2.clerkMiddleware)());
 const PORT = env_1.ENV.PORT;
 // const __dirname = path.resolve();
 // console.log('resolving it', path.resolve());
@@ -22,7 +25,11 @@ if (env_1.ENV.NODE_ENV === 'production') {
         res.sendFile(node_path_1.default.join(__dirname, '../../admin', 'dist', 'index.html'));
     });
 }
-app.listen(PORT, () => {
-    console.log(`app is listening on http://localhost:${PORT}`);
-});
+const startApp = () => {
+    (0, db_mongoose_1.connectDatabase)(env_1.ENV.MONGO_URL);
+    app.listen(PORT, () => {
+        console.log(`app is listening on http://localhost:${PORT}`);
+    });
+};
+startApp();
 console.log('the entry point');
