@@ -9,13 +9,18 @@ const cors_1 = __importDefault(require("cors"));
 const env_1 = require("./config/env");
 const db_mongoose_1 = require("./db/db.mongoose");
 const express_2 = require("@clerk/express");
+const express_3 = require("inngest/express");
+// import { inngest } from './lib/inngest';
+const inngest_1 = require("./lib/inngest");
 // import { fileURLToPath } from 'url';
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use((0, express_2.clerkMiddleware)());
+app.use(express_1.default.json());
 const PORT = env_1.ENV.PORT;
 // const __dirname = path.resolve();
 // console.log('resolving it', path.resolve());
+app.use('/api/inngest', (0, express_3.serve)({ client: inngest_1.inngest, functions: inngest_1.functions }));
 app.get('/api/health', (req, res) => {
     res.send('<h1>Testing the API</h1>');
 });
