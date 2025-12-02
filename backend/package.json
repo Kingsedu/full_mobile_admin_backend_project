@@ -20,6 +20,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "http-status-codes": "^2.3.0",
+    "inngest": "^3.46.0",
     "mongoose": "^9.0.0"
   },
   "devDependencies": {
