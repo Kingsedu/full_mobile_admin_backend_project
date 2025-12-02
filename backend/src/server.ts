@@ -9,9 +9,17 @@ import { functions, inngest } from './lib/inngest';
 const app = express();
 
 app.use(cors());
-app.use(clerkMiddleware());
 app.use(express.json());
+app.use('/api/inngest', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.path}`);
+  next();
+});
 app.use('/api/inngest', serve({ client: inngest, functions }));
+app.use(clerkMiddleware());
 
 const PORT = ENV.PORT;
 // const __dirname = path.resolve();
