@@ -10,9 +10,9 @@ import { functions } from './lib/inngest';
 // import { fileURLToPath } from 'url';
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
-app.use(express.json());
 const PORT = ENV.PORT;
 // const __dirname = path.resolve();
 // console.log('resolving it', path.resolve());

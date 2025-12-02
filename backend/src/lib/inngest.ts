@@ -7,8 +7,7 @@ export const inngest = new Inngest({ id: 'Ecommerce-app' });
 const syncUser = inngest.createFunction(
   { id: 'sync-user' },
   { event: 'clerk/user.created' },
-  async ({ event, step }) => {
-    await step.sleep('wait-a-moment', '1s');
+  async ({ event }) => {
     await connectDatabase(ENV.MONGO_URL as string);
     const { id, email_addresses, first_name, last_name, image_url } =
       event.data;
@@ -18,7 +17,7 @@ const syncUser = inngest.createFunction(
       email: email_addresses?.[0]?.email_address,
       name: `${first_name || ''} ${last_name || ''}`.trim() || 'User',
       imageUrl: image_url,
-      addressess: [],
+      addresses: [],
       wishlist: [],
     };
     await User.create(newUser);
