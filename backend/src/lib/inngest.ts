@@ -3,7 +3,7 @@ import { connectDatabase } from '../db/db.mongoose';
 import { ENV } from '../config/env';
 import { User } from '../models/user.model';
 
-export const inngest = new Inngest({ id: 'Ecommerce-app' });
+export const inngest = new Inngest({ id: 'ecommerce-app' });
 const syncUser = inngest.createFunction(
   { id: 'sync-user' },
   { event: 'clerk/user.created' },

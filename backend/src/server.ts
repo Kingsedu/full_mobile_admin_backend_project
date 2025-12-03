@@ -5,8 +5,7 @@ import { ENV } from './config/env';
 import { connectDatabase } from './db/db.mongoose';
 import { clerkMiddleware } from '@clerk/express';
 import { serve } from 'inngest/express';
-import { inngest } from './lib/inngest';
-import { functions } from './lib/inngest';
+import { functions, inngest } from './lib/inngest';
 // import { fileURLToPath } from 'url';
 const app = express();
 
