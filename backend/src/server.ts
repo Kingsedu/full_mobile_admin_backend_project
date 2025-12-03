@@ -11,11 +11,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use('/api/inngest', serve({ client: inngest, functions }));
 app.use(clerkMiddleware());
+
 const PORT = ENV.PORT;
 // const __dirname = path.resolve();
 // console.log('resolving it', path.resolve());
-app.use('/api/inngest', serve({ client: inngest, functions }));
 app.get('/api/health', (req, res) => {
   res.send('<h1>Testing the API</h1>');
 });
